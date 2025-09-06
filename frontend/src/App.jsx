@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
+import API_URL from './api';   // ⬅️ import API URL
 import './App.css';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/products');
+      const response = await axios.get(`${API_URL}/api/products`);
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -62,7 +62,6 @@ function App() {
   };
 
   const handleCheckout = () => {
-    // In a real app, this would process the payment
     alert(`Order placed successfully! Total: ₹${getTotalPrice()}`);
     setCart([]);
     setView('products');
